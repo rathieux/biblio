@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import biblio.dao.IDAOAvis;
-import biblio.restcontroller.dto.AvisDTO;
 import biblio.model.Avis;
+import biblio.restcontroller.dto.AvisDTO;
 
 @RestController
 @RequestMapping("/api/avis")
-// @CrossOrigin("http://localhost:4200")
 public class AvisRestController {
 
     @Autowired
@@ -19,23 +18,32 @@ public class AvisRestController {
 
     @GetMapping
     public List<AvisDTO> chercherTous() {
-        return daoAvis.findAll().stream().map(avis -> AvisDTO.convert(avis)).toList();
+        return daoAvis.findAll()
+                .stream()
+                .map(AvisDTO::convertWithLivre)
+                .toList();
     }
 
     @GetMapping("/{id}")
     public AvisDTO chercherParId(@PathVariable Integer id) {
-        return AvisDTO.convert(daoAvis.findById(id).orElse(null));
+        return AvisDTO.convertWithLivre(
+                daoAvis.findById(id).orElse(null)
+        );
     }
 
     @PostMapping
     public AvisDTO ajouter(@RequestBody Avis avis) {
-        return AvisDTO.convert(daoAvis.save(avis));
+        return AvisDTO.convertWithLivre(
+                daoAvis.save(avis)
+        );
     }
 
     @PutMapping("/{id}")
     public AvisDTO modifier(@PathVariable Integer id, @RequestBody Avis avis) {
         avis.setId(id);
-        return AvisDTO.convert(daoAvis.save(avis));
+        return AvisDTO.convertWithLivre(
+                daoAvis.save(avis)
+        );
     }
 
     @DeleteMapping("/{id}")
