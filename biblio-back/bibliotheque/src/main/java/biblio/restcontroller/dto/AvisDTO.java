@@ -32,12 +32,9 @@ public class AvisDTO {
 		return avisDTO;
 	}
 
-
-
-
     public static AvisDTO convertWithLivre(Avis avis) {
         AvisDTO avisDTO = convert(avis);
-        avisDTO.livreCustom = avis.getLivre().stream().map(a -> LivreDTO.convert(a))   ;
+        avisDTO.livreCustom = LivreDTO.convert(avis.getLivre());
         return avisDTO;
     }
 
@@ -72,21 +69,5 @@ public class AvisDTO {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Integer getLivreId() {
-        return livreId;
-    }
-
-    public void setLivreId(Integer livreId) {
-        this.livreId = livreId;
-    }
-
-    public String getLivreTitre() {
-        return livreTitre;
-    }
-
-    public void setLivreTitre(String livreTitre) {
-        this.livreTitre = livreTitre;
     }
 }
