@@ -29,5 +29,6 @@ export const routes: Routes = [
   {
     path: 'avis',
     component: AvisPage,
+    canActivate: [authGuard]
   },
 ];
