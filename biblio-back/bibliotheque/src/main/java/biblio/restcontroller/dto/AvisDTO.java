@@ -74,5 +74,4 @@ public class AvisDTO {
     public void setLivreCustom(LivreDTO livreCustom) {
         this.livreCustom = livreCustom;
     }
-
 }

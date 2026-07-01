@@ -31,9 +31,9 @@ public class AuteurRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public Auteur chercherParId(@PathVariable Integer id)  
+	public AuteurDTO chercherParId(@PathVariable Integer id)  
 	{
-		return daoAuteur.findById(id).orElse(null);
+		return AuteurDTO.convert(daoAuteur.findById(id).orElse(null));
 	}
 
 	
@@ -44,16 +44,16 @@ public class AuteurRestController {
 	}
 	
 	@PostMapping
-	public Auteur ajouter(@RequestBody Auteur auteur)  
+	public AuteurDTO ajouter(@RequestBody Auteur auteur)  
 	{
-		return daoAuteur.save(auteur);
+		return AuteurDTO.convert(daoAuteur.save(auteur));
 	}
 	
 	@PutMapping("/{id}")
-	public Auteur modifier(@PathVariable Integer id,@RequestBody Auteur auteur)  
+	public AuteurDTO modifier(@PathVariable Integer id,@RequestBody Auteur auteur)  
 	{
 		auteur.setId(id);
-		return daoAuteur.save(auteur);
+		return AuteurDTO.convert(daoAuteur.save(auteur));
 	}
 
     
