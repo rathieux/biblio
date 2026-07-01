@@ -14,15 +14,21 @@ export class LivreService {
     return this.http.get<Livre[]>(this.apiUrl);
   }
 
+  public findByTitre(recherche: string): Observable<Livre[]> {
+    return this.http.get<Livre[]>(`${ this.apiUrl }/recherche`, {
+      params: { recherche },
+    });
+  }
+
   public add(livre: Livre): Observable<Livre> {
     return this.http.post<Livre>(this.apiUrl, livre);
   }
 
   public update(livre: Livre): Observable<Livre> {
-    return this.http.put<Livre>(`${this.apiUrl}/${livre.id}`, livre);
+    return this.http.put<Livre>(`${ this.apiUrl }/${ livre.id }`, livre);
   }
 
   public remove(livre: Livre): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${livre.id}`);
+    return this.http.delete<void>(`${ this.apiUrl }/${ livre.id }`);
   }
 }

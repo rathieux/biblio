@@ -5,6 +5,7 @@ import { authGuard } from './guard/auth-guard';
 import { EditeurPage } from './page/editeur-page/editeur-page';
 import { AvisPage } from './page/avis-page/avis-page';
 import { AuteurPage } from './page/auteur-page/auteur-page/auteur-page';
+import { LivrePage } from './page/livre-page/livre-page';
 
 export const routes: Routes = [
   {
@@ -30,5 +31,11 @@ export const routes: Routes = [
     path: 'avis',
     component: AvisPage,
     canActivate: [authGuard]
+  },
+
+    {
+    path: 'livre',
+    component: LivrePage,
+    canActivate: [authGuard],
   },
 ];
