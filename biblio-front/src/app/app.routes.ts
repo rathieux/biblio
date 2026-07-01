@@ -10,10 +10,20 @@ export const routes: Routes = [
     component: CollectionPage,
     canActivate: [authGuard],
   },
+
+   {
+    path: 'auteur',
+    component: CollectionPage,
+    canActivate: [authGuard],
+  },
+
   { path: 'login', component: LoginPage },
 
   {
     path: 'editeur',
     component: EditeurPage,
+    canActivate: [authGuard],
   },
+
+
 ];
