@@ -9,8 +9,8 @@ import {
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { Collection } from '../model/collection';
-import { CollectionService } from '../service/collection-service';
+import { Collection } from '../../model/collection';
+import { CollectionService } from '../../service/collection-service';
 
 @Component({
   selector: 'app-collection-page',
