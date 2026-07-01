@@ -1,0 +1,38 @@
+<h1>Liste des livres</h1>
+
+<form (submit)="addOrUpdate()" [formGroup]="formLivre">
+  <div>
+    <input type="text" formControlName="titre" />
+  </div>
+
+  <div *ngIf="formLivre.get('titre')?.dirty && formLivre.get('titre')?.hasError('required')">
+    Le titre est obligatoire !!
+  </div>
+
+  <div>
+    <input [disabled]="formLivre.invalid" type="submit" [value]="editingLivreId !== undefined ? 'Modifier' : 'Ajouter'" />
+  </div>
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let livre of livres$ | async">
+      <td>{{ livre.id }}</td>
+      <td>{{ livre.titre }}</td>
+      <td>
+        <button (click)="edit(livre)">MODIFIER</button>
+        <button (click)="remove(livre)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
