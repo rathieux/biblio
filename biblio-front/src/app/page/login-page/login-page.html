@@ -1,10 +1,10 @@
-<h1>Page de connexion</h1>
+<h1>{{ newAccount ? 'Page de connexion' : 'Nouveau compte' }}</h1>
 
 @if (loginError()) {
   <div>Nom d'utilisateur ou mot de passe incorrect !</div>
 }
 
-<form (submit)="auth()" [formGroup]="formAuth">
+<form (submit)="newAccount ? auth() : register()" [formGroup]="formAuth">
   <div>
     <input type="text" formControlName="username" />
   </div>
@@ -26,4 +26,6 @@
   </div>
 </form>
 
-<button  value="Créer un nouveau compte" >Créer un nouveau compte</button>
+<button (click)="newAccount = !newAccount">
+  {{ newAccount ? 'Créer un nouveau compte' : 'Se connecter' }}
+</button>

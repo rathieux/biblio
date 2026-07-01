@@ -9,7 +9,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -24,8 +23,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
         // Configuration des autorisations
         http.authorizeHttpRequests(auth -> {
-            // On commence toujours par le plus spécifique, pour terminer par le plus général
-            auth.requestMatchers("/api/auth", "/api/home/free").permitAll();
+            auth.requestMatchers("/api/auth", "/api/utilisateur").permitAll();
 
             // Les utilisateurs doivent être authentifiés pour accéder à /quelquechose
             auth.requestMatchers("/**").authenticated();
@@ -66,9 +64,9 @@ public class SecurityConfig {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+       
 
-        return passwordEncoder;
+        return JwtUtils.encoder();
     }
 
     // Permet d'ajouter un AuthenticationManager de Spring Security dans le contexte de Spring, pour pouvoir le récupérer ailleurs et l'utiliser

@@ -20,8 +20,8 @@ export class AuthService {
     return this._token != '';
   }
 
-  public register() {
-    //this.http.post();
+  public register(request: AuthRequest) {
+    this.http.post('/auth/register', request).subscribe();
   }
 
   public auth(request: AuthRequest): Observable<void> {
@@ -30,10 +30,8 @@ export class AuthService {
         .post<string>('/auth', request, { responseType: 'text' })
         .subscribe({
           next: (resp) => {
-            console.log('resp', resp);
             this._token = resp;
             sessionStorage.setItem('token', resp);
-
             observer.next();
           },
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import biblio.restcontroller.dto.AuthRequest;
 import biblio.security.JwtUtils;
 
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthRestController {

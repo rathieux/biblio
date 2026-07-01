@@ -16,6 +16,8 @@ import { AuthService } from '../../service/auth-service';
   styleUrl: './login-page.css',
 })
 export class LoginPage implements OnInit {
+  protected newAccount = false;
+
   protected formAuth!: FormGroup;
   protected formCtrlUsername!: FormControl;
   protected formCtrlPassword!: FormControl;
@@ -39,6 +41,13 @@ export class LoginPage implements OnInit {
 
   public auth() {
     this.authService.auth(this.formAuth.getRawValue()).subscribe({
+      next: () => this.router.navigate(['collection']),
+      error: () => this.loginError.set(true),
+    });
+  }
+
+  public register() {
+    this.authService.register(this.formAuth.getRawValue()).subscribe({
       next: () => this.router.navigate(['collection']),
       error: () => this.loginError.set(true),
     });

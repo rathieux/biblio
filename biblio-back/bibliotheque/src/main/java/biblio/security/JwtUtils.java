@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -23,6 +26,12 @@ public class JwtUtils {
             .signWith(secretKey) // Signer le jeton JWT
             .compact() // Récupérer le jeton au format String
         ;
+    }
+
+    public static PasswordEncoder encoder() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        return passwordEncoder;
     }
 
     public static String validate(String token) {
