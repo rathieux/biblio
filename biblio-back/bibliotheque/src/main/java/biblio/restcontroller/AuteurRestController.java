@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import biblio.dao.IDAOAuteur;
 import biblio.model.Auteur;
+import biblio.restcontroller.dto.AuteurDTO;
 
 @RestController
 @RequestMapping("/api/auteur")
@@ -24,15 +25,15 @@ public class AuteurRestController {
     IDAOAuteur daoAuteur;
 
     @GetMapping
-	public List<Auteur> chercherTous()  
+	public List<AuteurDTO> chercherTous()  
 	{
-		return daoAuteur.findAll();	
+		return daoAuteur.findAll().stream().map(auteur->AuteurDTO.convert(auteur)).toList();	
 	}
 	
 	@GetMapping("/{id}")
-	public Auteur chercherParNumero(@PathVariable Integer id)  
+	public AuteurDTO chercherParId(@PathVariable Integer id)  
 	{
-		return daoAuteur.findById(id).orElse(null);
+		return AuteurDTO.convert(daoAuteur.findById(id).orElse(null));
 	}
 
 	
@@ -43,16 +44,16 @@ public class AuteurRestController {
 	}
 	
 	@PostMapping
-	public Auteur ajouter(@RequestBody Auteur auteur)  
+	public AuteurDTO ajouter(@RequestBody Auteur auteur)  
 	{
-		return daoAuteur.save(auteur);
+		return AuteurDTO.convert(daoAuteur.save(auteur));
 	}
 	
 	@PutMapping("/{id}")
-	public Auteur modifier(@PathVariable Integer id,@RequestBody Auteur auteur)  
+	public AuteurDTO modifier(@PathVariable Integer id,@RequestBody Auteur auteur)  
 	{
 		auteur.setId(id);
-		return daoAuteur.save(auteur);
+		return AuteurDTO.convert(daoAuteur.save(auteur));
 	}
 
     

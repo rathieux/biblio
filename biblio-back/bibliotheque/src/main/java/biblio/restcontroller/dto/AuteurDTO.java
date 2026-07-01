@@ -1,9 +1,19 @@
 package biblio.restcontroller.dto;
 
+import org.springframework.beans.BeanUtils;
+
+import biblio.model.Auteur;
 
 public class AuteurDTO {
     private Integer id;
 	private String nom,prenom,nationalite;
+
+    public static AuteurDTO convert(Auteur auteur) 
+	{
+		AuteurDTO auteurDTO = new AuteurDTO();
+		BeanUtils.copyProperties(auteur, auteurDTO);
+		return auteurDTO;
+	}
 
 
     public Integer getId() {
