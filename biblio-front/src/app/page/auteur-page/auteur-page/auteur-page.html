@@ -1,0 +1,42 @@
+<h1>Liste des auteurs</h1>
+
+<form (submit)="addOrUpdate()" [formGroup]="formAuteur">
+  <div>
+    <input type="text" formControlName="nom" />
+  </div>
+
+  <div *ngIf="formAuteur.get('nom')?.dirty && formAuteur.get('nom')?.hasError('required')">
+    Le message d'erreur comme quoi le nom est obligatoire !!
+  </div>
+
+  <div>
+    <input [disabled]="formAuteur.invalid" type="submit" [value]="editingAuteurId ? 'Modifier' : 'Ajouter'" />
+  </div>
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Nationalité</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let auteur of auteurs$ | async">
+      <td>{{ auteur.id }}</td>
+      <td>{{ auteur.nom }}</td>
+      <td>{{ auteur.prenom }}</td>
+      <td>{{ auteur.nationalite }}</td>
+      <td>
+        <button (click)="edit(auteur)">MODIFIER</button>
+        <button (click)="remove(auteur)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
