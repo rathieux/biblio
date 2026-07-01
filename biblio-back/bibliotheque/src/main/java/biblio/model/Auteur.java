@@ -11,6 +11,13 @@ public class Auteur {
 
     public Auteur() {}
 
+    public Auteur(Integer id, String nom, String prenom, String nationalite) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nationalite = nationalite;
+    }
+
     public Integer getId() {
         return id;
     }

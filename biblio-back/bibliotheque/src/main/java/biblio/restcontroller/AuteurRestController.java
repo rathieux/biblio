@@ -55,10 +55,6 @@ public class AuteurRestController {
 		return daoAuteur.save(auteur);
 	}
 
-
-
-
-
     
 
 }
