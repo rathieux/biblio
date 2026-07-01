@@ -1,0 +1,44 @@
+<h1>Liste des editeurs</h1>
+
+<form (submit)="addOrUpdate()" [formGroup]="formEditeur">
+  <div>
+    <input type="text" formControlName="nom" />
+  </div>
+
+    <div>
+    <input type="text" formControlName="pays" />
+  </div>
+
+  <div *ngIf="formEditeur.get('nom')?.dirty && formEditeur.get('nom')?.hasError('required')">
+    Le message d'erreur comme quoi le nom est obligatoire !!
+  </div>
+
+  <div>
+    <input [disabled]="formEditeur.invalid" type="submit" [value]="editingEditeurId ? 'Modifier' : 'Ajouter'" />
+  </div>
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Pays</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let editeur of editeurs$ | async">
+      <td>{{ editeur.id }}</td>
+      <td>{{ editeur.nom }}</td>
+      <td>{{ editeur.pays }}</td>
+      <td>
+        <button (click)="edit(editeur)">MODIFIER</button>
+        <button (click)="remove(editeur)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
