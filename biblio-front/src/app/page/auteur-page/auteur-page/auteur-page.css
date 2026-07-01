@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 
 body {
-    margin: 5px;
+    margin: 10%;
     padding: 50px;
     border-radius: 8px;
     font-family: "Segoe UI", Arial, sans-serif;
     background: url(../../asset/image/will-van-wingerden-dsvJgiBJTOs-unsplash.jpg) center center / cover no-repeat;
     color: #2c2c2c;
-    height: 90vh;
+    height: auto;
 
 }
 header{
@@ -18,6 +18,9 @@ header{
   border: 1px solid rgba(255,255,255,0.3);
 
   margin: 5px;
+  position:sticky;
+  top : 0px;
+  z-index: 9999;
 
 }
 h1 {
@@ -30,6 +33,7 @@ h1 {
     font-weight: 600;
     letter-spacing: .2em;
     transition: opacity .3s;
+
 }
 
 form {
@@ -109,6 +113,7 @@ button:hover {
 table {
   width: 90%;
   margin: 30px auto;
+  height: auto;
 
   overflow: hidden;
 
@@ -138,7 +143,8 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-    background: #efebe9;
+    background: #7e6d65;
+    color : white
 }
 
 td button {

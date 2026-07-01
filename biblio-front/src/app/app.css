@@ -13,6 +13,7 @@ body{
   gap: 20px;
   justify-content: center;
 
+
 }
 body div a {
   display: inline-block;
@@ -27,3 +28,4 @@ body div a {
 
   color: #2c2c2c;
 }
+
