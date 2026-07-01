@@ -24,6 +24,8 @@ export class AuteurPage implements OnInit{
   private formBuilder: FormBuilder = inject(FormBuilder);
   protected formAuteur!: FormGroup;
   protected formCtrlNom!: FormControl;
+  protected formCtrlPrenom!: FormControl;
+  protected formCtrlNationalite!: FormControl;
   protected editingAuteurId: number | undefined = 0;
 
   ngOnInit(): void {
@@ -35,9 +37,13 @@ export class AuteurPage implements OnInit{
     );
 
     this.formCtrlNom = this.formBuilder.control('', Validators.required);
+    this.formCtrlPrenom = this.formBuilder.control('', Validators.required);
+    this.formCtrlNationalite = this.formBuilder.control('', Validators.required);
 
     this.formAuteur = this.formBuilder.group({
       nom: this.formCtrlNom,
+      prenom: this.formCtrlPrenom,
+      nationalite: this.formCtrlNationalite,
     });
   }
 
@@ -62,6 +68,8 @@ export class AuteurPage implements OnInit{
   protected edit(auteur: Auteur) {
     this.editingAuteurId = auteur.id;
     this.formCtrlNom.setValue(auteur.nom);
+    this.formCtrlPrenom.setValue(auteur.prenom);
+    this.formCtrlNationalite.setValue(auteur.nationalite);
   }
 
   protected remove(auteur: Auteur) {
