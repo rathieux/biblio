@@ -1,0 +1,60 @@
+package biblio.restcontroller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import biblio.dao.IDAOAuteur;
+import biblio.model.Auteur;
+
+@RestController
+@RequestMapping("/api/auteur")
+public class AuteurRestController {
+
+    @Autowired
+    IDAOAuteur daoAuteur;
+
+    @GetMapping
+	public List<Auteur> chercherTous()  
+	{
+		return daoAuteur.findAll();	
+	}
+	
+	@GetMapping("/{id}")
+	public Auteur chercherParNumero(@PathVariable Integer id)  
+	{
+		return daoAuteur.findById(id).orElse(null);
+	}
+
+	
+	@DeleteMapping("/{id}")
+	public void supprimer(@PathVariable Integer id)  
+	{
+		daoAuteur.deleteById(id);
+	}
+	
+	@PostMapping
+	public Auteur ajouter(@RequestBody Auteur auteur)  
+	{
+		return daoAuteur.save(auteur);
+	}
+	
+	@PutMapping("/{id}")
+	public Auteur modifier(@PathVariable Integer id,@RequestBody Auteur auteur)  
+	{
+		auteur.setId(id);
+		return daoAuteur.save(auteur);
+	}
+
+    
+
+}
