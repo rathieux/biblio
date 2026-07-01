@@ -25,7 +25,6 @@ body div a {
   font : normal 400 20px/1 'Cinzel Decorative', serif;
   font-weight: 600;
   letter-spacing: .2em;
-  text-decoration: none;
   transition: opacity .3s;
 
   color: #2c2c2c;
