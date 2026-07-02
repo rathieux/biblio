@@ -3,6 +3,14 @@ pipeline {
 
     stages {
 
+        stage('Start compose') {
+            steps {
+                dir('biblio-back/bibliotheque') {
+                    sh 'docker compose up -d '
+                }
+            }
+        }
+
 
         stage('Maven Package') {
             agent {
@@ -23,13 +31,6 @@ pipeline {
             }
         }
 
-                stage('Start compose') {
-            steps {
-                dir('biblio-back/bibliotheque') {
-                    sh 'docker compose up -d '
-                }
-            }
-        }
 
         stage('Run Frontend') {
 
