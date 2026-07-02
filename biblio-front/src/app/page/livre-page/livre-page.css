@@ -10,6 +10,7 @@ body {
     height: 90vh;
     min-height: 90vh;
     overflow-y: scroll;
+    width: 100%;
 
 }
 
