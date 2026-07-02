@@ -6,12 +6,12 @@
 <body>
 <form (submit)="addOrUpdate()" [formGroup]="formEditeur">
   <div>
-    <input type="text" formControlName="nom" />
+    <input type="text" formControlName="nom" placeholder="Nom" />
   </div>
 
 
     <div>
-      <input type="text" formControlName="pays" />
+      <input type="text" formControlName="pays" placeholder="Pays" />
     </div>
 
     <div *ngIf="formEditeur.get('nom')?.dirty && formEditeur.get('nom')?.hasError('required')">
