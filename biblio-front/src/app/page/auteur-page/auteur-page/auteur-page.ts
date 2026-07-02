@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { AuteurService } from '../../../service/auteur-service/auteur-service';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
@@ -12,8 +18,7 @@ import { Auteur } from '../../../model/auteur';
   templateUrl: './auteur-page.html',
   styleUrl: './auteur-page.css',
 })
-export class AuteurPage implements OnInit{
-
+export class AuteurPage implements OnInit {
   private titleService: Title = inject(Title);
   private auteurService: AuteurService = inject(AuteurService);
 
@@ -81,9 +86,4 @@ export class AuteurPage implements OnInit{
   protected remove(auteur: Auteur) {
     this.auteurService.remove(auteur).subscribe(() => this.reload());
   }
-
-
-
-
-
 }
