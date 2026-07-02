@@ -1,33 +1,32 @@
-<h1>Page de connexion</h1>
+<header><h1>Page de connexion</h1></header>
 
-@if (loginError()) {
-  <div>Nom d'utilisateur ou mot de passe incorrect !</div>
-}
-
-<form (submit)="newAccount ? register() : auth()" [formGroup]="formAuth">
-  <div>
-    <input type="text" formControlName="username" />
-  </div>
-
-  @if (formCtrlUsername.dirty && formCtrlUsername.invalid) {
-    <div>Le nom d'utilisation est obligatoire</div>
+<body>
+  @if (loginError()) {
+    <div>Nom d'utilisateur ou mot de passe incorrect !</div>
   }
 
-  <div>
-    <input type="password" formControlName="password" />
+  <div id="formDiv">
+    <form (submit)="newAccount ? register() : auth()" [formGroup]="formAuth">
+      <div>
+        <input type="text" placeholder="Login" formControlName="username" />
+      </div>
+
+      @if (formCtrlUsername.dirty && formCtrlUsername.invalid) {
+        <div>Le nom d'utilisation est obligatoire</div>
+      }
+
+      <div>
+        <input type="password" placeholder="Mot de passe" formControlName="password" />
+      </div>
+
+      @if (formCtrlPassword.dirty && formCtrlPassword.hasError('required')) {
+        <div>Le mot de passe est obligatoire</div>
+      }
+
+      <div>
+        <input [disabled]="formAuth.invalid" type="submit" value="Se connecter" />
+      </div>
+    </form>
+    <a routerLink="/register"> Créer un nouveau compte </a>
   </div>
-
-  @if (formCtrlPassword.dirty && formCtrlPassword.hasError('required')) {
-    <div>Le mot de passe est obligatoire</div>
-  }
-
-  <div>
-    <input
-      [disabled]="formAuth.invalid"
-      type="submit"
-      value="Se connecter"
-    />
-  </div>
-</form>
-
-<a routerLink="/register"> Créer un nouveau compte </a>
+</body>

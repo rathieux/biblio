@@ -1,4 +1,4 @@
-<body class="header">
+<body class="header" *ngIf="authService.token">
   <div>
     <a [routerLink]="['collection']">Liste des collections</a>
   </div>
@@ -19,6 +19,7 @@
     <a [routerLink]="['livre']">Liste des livres</a>
   </div>
 
+  <div><button (click)="logOut()">Déconnexion</button></div>
 </body>
 
 <router-outlet></router-outlet>
