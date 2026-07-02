@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.mysql
     image: ajc/biblio-mysql
-    container_name: biblio-mysql
+    container_name: mysql
 
     networks:
       - biblio
