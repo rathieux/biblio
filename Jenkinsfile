@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage('Start MySQL') {
+            steps {
+                dir('biblio-front') {
+                    sh 'docker compose up -d mysql'
+                }
+            }
+        }
+
         stage('Maven Package') {
             agent {
                 docker {
@@ -9,20 +17,16 @@ pipeline {
                     args '''-v /Users/mathieu/.m2:/root/.m2:z
                             -u root
                             --network biblio
-                        ''' 
-                        
-                        // Pour garder le cache Maven
-                    reuseNode true // Permet de partager le même workspace que l'agent Jenkins
+                        '''
+                    reuseNode true
                 }
             }
 
             steps {
                 dir('biblio-back/bibliotheque') {
-                        sh 'getent hosts host.docker.internal'
-                        sh "mvn clean package"
-                    }
-                    
+                    sh 'mvn clean package'
                 }
             }
         }
+    }
 }
