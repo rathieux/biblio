@@ -13,7 +13,7 @@ import { AuthService } from '../../service/auth-service';
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login-page.html',
-  styleUrl: './login-page.css',
+  styleUrl: '../login-page.css',
 })
 export class LoginPage implements OnInit {
   protected newAccount = false;

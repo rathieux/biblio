@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private _token: string = '';
+  private _token: string = sessionStorage.getItem('token') ?? '';
 
   public get token(): string {
     const cachedToken = sessionStorage.getItem('token');

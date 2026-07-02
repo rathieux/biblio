@@ -8,15 +8,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { AuteurService } from '../../../service/auteur-service/auteur-service';
+import { AuteurService } from '../../service/auteur-service/auteur-service';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { Auteur } from '../../../model/auteur';
+import { Auteur } from '../../model/auteur';
 
 @Component({
   selector: 'app-auteur-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './auteur-page.html',
-  styleUrl: './auteur-page.css',
+  styleUrl: '../shared-styling.css',
 })
 export class AuteurPage implements OnInit {
   private titleService: Title = inject(Title);

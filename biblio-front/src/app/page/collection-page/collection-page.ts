@@ -16,7 +16,7 @@ import { CollectionService } from '../../service/collection-service';
   selector: 'app-collection-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './collection-page.html',
-  styleUrl: './collection-page.css',
+  styleUrl: '../shared-styling.css',
 })
 export class CollectionPage implements OnInit {
   private titleService: Title = inject(Title);

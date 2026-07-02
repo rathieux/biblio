@@ -5,17 +5,17 @@ import { authGuard } from './guard/auth-guard';
 import { EditeurPage } from './page/editeur-page/editeur-page';
 import { RegisterPage } from './page/register-page/register-page';
 import { AvisPage } from './page/avis-page/avis-page';
-import { AuteurPage } from './page/auteur-page/auteur-page/auteur-page';
+import { AuteurPage } from './page/auteur-page/auteur-page';
 import { LivrePage } from './page/livre-page/livre-page';
 
 export const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   {
     path: 'collection',
     component: CollectionPage,
     canActivate: [authGuard],
   },
-
-   {
+  {
     path: 'auteur',
     component: AuteurPage,
     canActivate: [authGuard],
@@ -31,10 +31,10 @@ export const routes: Routes = [
   {
     path: 'avis',
     component: AvisPage,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
 
-    {
+  {
     path: 'livre',
     component: LivrePage,
     canActivate: [authGuard],
