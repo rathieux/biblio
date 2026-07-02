@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Start MySQL') {
             steps {
-                dir('biblio-front') {
+                dir('biblio-back/bibliotheque') {
                     sh 'docker compose up -d mysql'
                 }
             }
