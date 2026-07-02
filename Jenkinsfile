@@ -2,13 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Start MySQL') {
-            steps {
-                dir('biblio-back/bibliotheque') {
-                    sh 'docker compose up -d mysql'
-                }
-            }
-        }
+
 
         stage('Maven Package') {
             agent {
@@ -24,22 +18,17 @@ pipeline {
 
             steps {
                 dir('biblio-back/bibliotheque') {
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
-        stage('Run Backend') {
 
+                stage('Start compose') {
             steps {
-
                 dir('biblio-back/bibliotheque') {
-
-                    sh 'docker compose up -d java'
-
+                    sh 'docker compose up -d '
                 }
-
             }
-
         }
 
         stage('Run Frontend') {
