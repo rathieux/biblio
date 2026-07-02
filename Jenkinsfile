@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage('Cleanup') {
+            steps {
+                sh 'docker rm -f biblio-angular || true'
+                sh 'docker rm -f biblio-java || true'
+                sh 'docker rm -f biblio-mysql || true'
+            }
+        }
+
         stage('Start MySQL') {
             steps {
                 dir('biblio-back/bibliotheque') {
@@ -39,7 +47,7 @@ pipeline {
 
         stage('Run Frontend') {
             steps {
-                dir('biblio-front/') {
+                dir('biblio-front') {
                     sh 'docker build -t biblio-angular .'
                     sh 'docker run -d -p 4200:80 --name biblio-angular biblio-angular'
                 }
