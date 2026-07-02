@@ -6,9 +6,9 @@
   <main>
     <form (submit)="addOrUpdate()" [formGroup]="formAuteur">
       <div style="display:flex;">
-        <input type="text" formCtrlNom="nom" placeholder="Nom"/>
-        <input type="text" formCtrlPrenom="nom" placeholder="Prenom"/>
-        <input type="text" formCtrlNationalite="nom" placeholder="Nationalité"/>
+        <input type="text" formControlName="nom" placeholder="Nom"/>
+        <input type="text" formControlName="prenom" placeholder="Prenom"/>
+        <input type="text" formControlName="nationalite" placeholder="Nationalité"/>
       </div>
 
       <div *ngIf="formAuteur.get('nom')?.dirty && formAuteur.get('nom')?.hasError('required')">
