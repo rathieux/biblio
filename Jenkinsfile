@@ -28,5 +28,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Run Backend') {
+            steps {
+                dir('biblio-back/bibliotheque') {
+                    sh 'docker compose up -d java'
+                }
+            }
+        }
+
+        stage('Run Frontend') {
+            steps {
+                dir('biblio-front/') {
+                    sh 'docker build -t biblio-angular .'
+                    sh 'docker run -d -p 4200:80 --name biblio-angular biblio-angular'
+                }
+            }
+        }
     }
 }
