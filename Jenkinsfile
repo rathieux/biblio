@@ -7,8 +7,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9-amazoncorretto-21'
-                    args '-u root'
-                    --network biblio
+                    args '-u root --network biblio'
                     reuseNode true
                 }
             }
