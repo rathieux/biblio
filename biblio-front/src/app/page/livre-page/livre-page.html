@@ -1,5 +1,37 @@
 <h1>Liste des livres</h1>
 
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Année</th>
+      <th>Auteur</th>
+      <th>Éditeur</th>
+      <th>Collection</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let livre of livres$ | async">
+      <td>{{ livre.id }}</td>
+      <td>{{ livre.titre }}</td>
+      <td>{{ livre.annee }}</td>
+      <td>{{ livre.auteur?.prenom }} {{ livre.auteur?.nom }}</td>
+      <td>{{ livre.editeur?.nom }}</td>
+      <td>{{ livre.collection?.nom }}</td>
+      <td>
+        <button (click)="edit(livre)">MODIFIER</button>
+        <button (click)="remove(livre)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <form (submit)="addOrUpdate()" [formGroup]="formLivre">
   <div>
     <label>Titre</label>
@@ -66,34 +98,3 @@
     <input [disabled]="formLivre.invalid" type="submit" [value]="editingLivreId ? 'Modifier' : 'Ajouter'" />
   </div>
 </form>
-
-<hr />
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Titre</th>
-      <th>Année</th>
-      <th>Auteur</th>
-      <th>Éditeur</th>
-      <th>Collection</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let livre of livres$ | async">
-      <td>{{ livre.id }}</td>
-      <td>{{ livre.titre }}</td>
-      <td>{{ livre.annee }}</td>
-      <td>{{ livre.auteur?.prenom }} {{ livre.auteur?.nom }}</td>
-      <td>{{ livre.editeur?.nom }}</td>
-      <td>{{ livre.collection?.nom }}</td>
-      <td>
-        <button (click)="edit(livre)">MODIFIER</button>
-        <button (click)="remove(livre)">SUPPRIMER</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
