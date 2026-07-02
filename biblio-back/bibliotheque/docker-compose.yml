@@ -1,0 +1,45 @@
+name: biblio
+
+services:
+  mysql:
+    image: mysql:8.0.45
+    container_name: biblio-mysql
+
+    networks:
+      - biblio
+
+    environment:
+      MYSQL_DATABASE: biblio
+      MYSQL_ROOT_PASSWORD: root
+
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 3s
+      retries: 10
+      interval: 5s
+
+    volumes:
+      - ./sql/biblio.sql:/docker-entrypoint-initdb.d/init.sql
+
+  java:
+    build: .
+    image: ajc/biblio
+
+    networks:
+      - biblio
+
+    ports:
+      - 8080:8080
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/biblio
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  biblio:
+    name: biblio
