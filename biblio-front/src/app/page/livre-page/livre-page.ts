@@ -22,7 +22,7 @@ import { CollectionService } from '../../service/collection-service';
   selector: 'app-livre-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './livre-page.html',
-  styleUrl: './livre-page.css',
+  styleUrl: '../shared-styling.css',
 })
 export class LivrePage implements OnInit {
   private titleService: Title = inject(Title);

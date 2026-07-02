@@ -12,7 +12,7 @@ import { Livre } from '../../model/livre';
   selector: 'app-avis-page',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './avis-page.html',
-  styleUrl: './avis-page.css',
+  styleUrls: ['../shared-styling.css', './avis-page.css'],
 })
 export class AvisPage {
   private titleService: Title = inject(Title);

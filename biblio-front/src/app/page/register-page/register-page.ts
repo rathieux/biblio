@@ -13,7 +13,7 @@ import { AuthService } from '../../service/auth-service';
   selector: 'app-register-page',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register-page.html',
-  styleUrl: './register-page.css',
+  styleUrl: '../login-page.css',
 })
 export class RegisterPage implements OnInit {
   protected formAuth!: FormGroup;

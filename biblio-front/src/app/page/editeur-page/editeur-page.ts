@@ -16,7 +16,7 @@ import { EditeurService } from '../../service/editeur-service';
   selector: 'app-editeur-page',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './editeur-page.html',
-  styleUrl: './editeur-page.css',
+  styleUrl: '../shared-styling.css',
 })
 export class EditeurPage implements OnInit {
   private titleService: Title = inject(Title);
