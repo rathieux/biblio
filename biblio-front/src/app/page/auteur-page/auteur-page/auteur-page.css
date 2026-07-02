@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 
 body {
-    margin: 5px;
-    padding: 50px;
+    margin: 1%;
+    padding: 5%;
     border-radius: 8px;
     font-family: "Segoe UI", Arial, sans-serif;
     background: url(../../asset/image/will-van-wingerden-dsvJgiBJTOs-unsplash.jpg) center center / cover no-repeat;
     color: #2c2c2c;
-    height: 90vh;
+    height: auto;
 
 }
 header{
@@ -17,7 +17,10 @@ header{
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255,255,255,0.3);
 
-  margin: 5px;
+  margin: 1%;
+  position:sticky;
+  top : 0px;
+  z-index: 9999;
 
 }
 h1 {
@@ -30,10 +33,11 @@ h1 {
     font-weight: 600;
     letter-spacing: .2em;
     transition: opacity .3s;
+
 }
 
 form {
-    width: 500px;
+    width: 50%;
     margin: 0 auto 40px;
 
     padding: 25px;
@@ -47,8 +51,6 @@ form {
     border: 1px solid rgba(255,255,255,0.3);
 
 
-
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,17 +59,17 @@ form {
 
 
 form div {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 input,
 textarea,
 select {
     width: 100%;
-    margin-right: 15px;
+    margin-right: 5%;
     box-sizing: border-box;
-    padding: 12px;
+    padding: 4%;
     border: 2px solid #d7ccc8;
     border-radius: 8px;
     font-size: 15px;
@@ -85,19 +87,22 @@ select:focus {
 textarea {
     resize: vertical;
     min-height: 100px;
+
 }
 
 input[type="submit"],
 button {
-    margin-left: 15px;
-    background: #6d4c41;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: .2s;
-    font-weight: bold;
+
+  width: 100%;
+  margin: 15px;
+  background: #6d4c41;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .2s;
+  font-weight: bold;
 }
 
 input[type="submit"]:hover,
@@ -108,7 +113,8 @@ button:hover {
 
 table {
   width: 90%;
-  margin: 30px auto;
+  margin: 5%;
+  height: auto;
 
   overflow: hidden;
 
@@ -128,8 +134,8 @@ thead {
 
 th,
 td {
-    padding: 15px;
-    text-align: left;
+    padding: 1%;
+    text-align: center;
 }
 
 tbody tr:nth-child(even) {
@@ -138,11 +144,13 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-    background: #efebe9;
+    background: #7e6d65;
+    color : white
 }
 
 td button {
     margin-right: 8px;
+    max-width: 50%;
 }
 
 hr {
@@ -164,9 +172,8 @@ body::before {
 }
 
 footer{
-  margin : 5px;
+  margin : 1%;
   position: relative;
-  width: 100%;
   height: 10vh;
 
   display:flex;
@@ -183,6 +190,5 @@ footer{
 footer .pieds h1{
     text-align: center;
     color: #000000;
-    margin: 30px 0;
     font-size: 2.2rem;
 }

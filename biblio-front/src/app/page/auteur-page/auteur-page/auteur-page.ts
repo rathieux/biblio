@@ -52,7 +52,13 @@ export class AuteurPage implements OnInit{
   }
 
   protected addOrUpdate() {
-    const auteur: Auteur = this.formAuteur.getRawValue();
+    const raw = this.formAuteur.getRawValue();
+
+    const auteur: Auteur = {
+        nom: raw.nom,
+        prenom: raw.prenom,
+        nationalite: raw.nationalite,
+        };
 
     if (this.editingAuteurId) {
       auteur.id = this.editingAuteurId;
