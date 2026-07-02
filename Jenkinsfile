@@ -42,6 +42,22 @@ pipeline {
 
         }
 
+        stage('Run Frontend') {
+
+            steps {
+
+                dir('biblio-front') {
+
+                    sh 'docker build -t biblio-angular .'
+
+                    sh 'docker run -d -p 4200:80 --name biblio-angular biblio-angular'
+
+                }
+
+            }
+
+        }
+
     
     }
 }
