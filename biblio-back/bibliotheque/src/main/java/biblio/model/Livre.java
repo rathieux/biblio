@@ -126,4 +126,9 @@ public class Livre {
         return "Livre [id=" + id + ", titre=" + titre + ", annee=" + annee + ", auteur=" + auteur
                 + ", editeur=" + editeur + ", collection=" + collection + "]";
     }
+
+    public Object stream() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stream'");
+    }
 }

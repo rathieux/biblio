@@ -1,38 +1,46 @@
-<h1>Liste des collections</h1>
+<header><h1>Liste des collections</h1></header>
 
-<form (submit)="addOrUpdate()" [formGroup]="formCollection">
-  <div>
-    <input type="text" formControlName="nom" />
-  </div>
+<body>
+  <form (submit)="addOrUpdate()" [formGroup]="formCollection">
+    <div>
+      <input type="text" placeholder="Nom" formControlName="nom" />
+    </div>
 
-  <div *ngIf="formCollection.get('nom')?.dirty && formCollection.get('nom')?.hasError('required')">
-    Le message d'erreur comme quoi le nom est obligatoire !!
-  </div>
+    <div
+      *ngIf="formCollection.get('nom')?.dirty && formCollection.get('nom')?.hasError('required')"
+    >
+      Le message d'erreur comme quoi le nom est obligatoire !!
+    </div>
 
-  <div>
-    <input [disabled]="formCollection.invalid" type="submit" [value]="editingCollectionId ? 'Modifier' : 'Ajouter'" />
-  </div>
-</form>
+    <div>
+      <input
+        [disabled]="formCollection.invalid"
+        type="submit"
+        [value]="editingCollectionId ? 'Modifier' : 'Ajouter'"
+      />
+    </div>
+  </form>
 
-<hr />
+  <hr />
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nom</th>
-      <th></th>
-    </tr>
-  </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let collection of collections$ | async">
-      <td>{{ collection.id }}</td>
-      <td>{{ collection.nom }}</td>
-      <td>
-        <button (click)="edit(collection)">MODIFIER</button>
-        <button (click)="remove(collection)">SUPPRIMER</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr *ngFor="let collection of collections$ | async">
+        <td>{{ collection.id }}</td>
+        <td>{{ collection.nom }}</td>
+        <td>
+          <button (click)="edit(collection)">MODIFIER</button>
+          <button (click)="remove(collection)">SUPPRIMER</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

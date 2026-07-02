@@ -1,0 +1,57 @@
+
+<h1>Liste des avis</h1>
+
+<form class="form-inline" (submit)="addOrUpdate()" [formGroup]="formAvis">
+
+  <select formControlName="livre" [compareWith]="compareLivre">
+    <option *ngFor="let livre of livres$ | async" [ngValue]="livre">
+      {{ livre.titre }}
+    </option>
+  </select>
+
+  <div>
+    <input type="number" placeholder="Note" formControlName="note" />
+  </div>
+
+  <div>
+    <textarea placeholder="Commentaire" formControlName="commentaire"></textarea>
+  </div>
+
+  <div>
+    <input type="date" formControlName="date" />
+  </div>
+
+  <div>
+    <input type="submit" [value]="editingAvisId ? 'Modifier' : 'Ajouter'" />
+  </div>
+
+</form>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Livre</th>
+      <th>Note</th>
+      <th>Commentaire</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let avis of avis$ | async">
+      <td>{{ avis.id }}</td>
+      <td>{{avis.livreCustom.titre}}</td>
+      <td>{{ avis.note }}</td>
+      <td>{{ avis.commentaire }}</td>
+      <td>{{ avis.date }}</td>
+      <td>
+        <button (click)="edit(avis)">MODIFIER</button>
+        <button (click)="remove(avis)">SUPPRIMER</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
