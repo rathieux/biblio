@@ -3,23 +3,13 @@ pipeline {
 
     stages {
 
-        stage('Start compose') {
-            steps {
-                dir('biblio-back/bibliotheque') {
-                    sh 'docker rm -f biblio-angular || true'
-                    sh 'docker compose up -d '
-                }
-            }
-        }
-
         stage('Maven Package') {
             agent {
                 docker {
                     image 'maven:3.9-amazoncorretto-21'
-                    args '''-v /Users/mathieu/.m2:/root/.m2:z
-                            -u root
-                            --network biblio
-                        '''
+                    args '''
+                        -u root
+                    '''
                     reuseNode true
                 }
             }
@@ -31,23 +21,22 @@ pipeline {
             }
         }
 
-
-        stage('Run Frontend') {
-
+        stage('Start Backend') {
             steps {
-
-                dir('biblio-front') {
-
-                    sh 'docker build -t biblio-angular .'
-
-                    sh 'docker run -d -p 4200:80 --name biblio-angular biblio-angular'
-
+                dir('biblio-back/bibliotheque') {
+                    sh 'docker rm -f biblio-angular || true'
+                    sh 'docker compose up -d'
                 }
-
             }
-
         }
 
-    
+        stage('Run Frontend') {
+            steps {
+                dir('biblio-front') {
+                    sh 'docker build -t biblio-angular .'
+                    sh 'docker run -d -p 4200:80 --name biblio-angular biblio-angular'
+                }
+            }
+        }
     }
 }
