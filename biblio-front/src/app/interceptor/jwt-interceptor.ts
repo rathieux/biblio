@@ -5,7 +5,7 @@ import { AuthService } from '../service/auth-service';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
 
-  if (req.url.endsWith('/api/auth')) {
+  if (req.url.endsWith('/api/auth') || req.url.endsWith('/api/utilisateur')) {
     return next(req);
   }
 
