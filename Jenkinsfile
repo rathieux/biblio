@@ -28,6 +28,19 @@ pipeline {
                 }
             }
         }
+        stage('Run Backend') {
+
+            steps {
+
+                dir('biblio-back/bibliotheque') {
+
+                    sh 'docker compose up -d java'
+
+                }
+
+            }
+
+        }
 
     
     }
