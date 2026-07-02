@@ -6,6 +6,7 @@ pipeline {
         stage('Start compose') {
             steps {
                 dir('biblio-back/bibliotheque') {
+                    sh 'docker rm - f biblio-angular || true'
                     sh 'docker compose up -d '
                 }
             }
