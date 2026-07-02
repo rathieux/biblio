@@ -145,13 +145,6 @@ td button {
     margin-right: 8px;
 }
 
-hr {
-    width: 90%;
-    border: none;
-    border-top: 2px solid #d7ccc8;
-    margin: 40px auto;
-}
-
 /* Petit effet bibliothèque */
 body::before {
     content: "📚";
