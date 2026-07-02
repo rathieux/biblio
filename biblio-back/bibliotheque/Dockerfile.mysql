@@ -1,6 +1,0 @@
-FROM mysql:8.0.45
-
-ENV MYSQL_DATABASE=biblio
-ENV MYSQL_ROOT_PASSWORD=root
-
-COPY sql/biblio.sql /docker-entrypoint-initdb.d/init.sql
