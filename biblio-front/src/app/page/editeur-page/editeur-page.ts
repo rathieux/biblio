@@ -70,6 +70,7 @@ export class EditeurPage implements OnInit {
   protected edit(editeur: Editeur) {
     this.editingEditeurId = editeur.id;
     this.formCtrlNom.setValue(editeur.nom);
+    this.formCtrlPays.setValue(editeur.pays);
   }
 
   protected remove(editeur: Editeur) {
