@@ -19,6 +19,8 @@ public class UtilisateurRestController {
     @PostMapping()
     public Utilisateur ajouter(@RequestBody Utilisateur utilisateur) {
         utilisateur.setPassword(JwtUtils.encoder().encode(utilisateur.getPassword()));
+        System.out.println("utilisateur=" + utilisateur.getUsername());
+        System.out.println("password=" + utilisateur.getPassword());
         utilisateurDao.save(utilisateur);
         return utilisateur;
     }

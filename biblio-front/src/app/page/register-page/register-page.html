@@ -1,1 +1,25 @@
-<p>register-page works!</p>
+<h1>Nouveau compte</h1>
+
+<form (submit)="register()" [formGroup]="formAuth">
+  <div>
+    <input type="text" formControlName="username" />
+  </div>
+
+  @if (formCtrlUsername.dirty && formCtrlUsername.invalid) {
+    <div>Le nom d'utilisation est obligatoire</div>
+  }
+
+  <div>
+    <input type="password" formControlName="password" />
+  </div>
+
+  @if (formCtrlPassword.dirty && formCtrlPassword.hasError('required')) {
+    <div>Le mot de passe est obligatoire</div>
+  }
+
+  <div>
+    <input [disabled]="formAuth.invalid" type="submit" [value]="'S inscrire'" />
+  </div>
+</form>
+
+<a routerLink="/login"> J'ai déjà un compte </a>

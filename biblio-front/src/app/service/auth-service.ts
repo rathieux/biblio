@@ -21,25 +21,33 @@ export class AuthService {
   }
 
   public register(request: AuthRequest) {
-    this.http.post('/auth/register', request).subscribe();
+    return new Observable<void>((observer) =>
+      this.http.post('/utilisateur', request).subscribe({
+        next: () => {
+          observer.next();
+        },
+        error: (error) => {
+          console.log(error);
+          observer.error();
+        },
+      })
+    );
   }
 
   public auth(request: AuthRequest): Observable<void> {
     return new Observable<void>((observer) => {
-      this.http
-        .post<string>('/auth', request, { responseType: 'text' })
-        .subscribe({
-          next: (resp) => {
-            this._token = resp;
-            sessionStorage.setItem('token', resp);
-            observer.next();
-          },
+      this.http.post<string>('/auth', request, { responseType: 'text' }).subscribe({
+        next: (resp) => {
+          this._token = resp;
+          sessionStorage.setItem('token', resp);
+          observer.next();
+        },
 
-          error: (error) => {
-            console.log(error);
-            observer.error();
-          },
-        });
+        error: (error) => {
+          console.log(error);
+          observer.error();
+        },
+      });
     });
   }
 
