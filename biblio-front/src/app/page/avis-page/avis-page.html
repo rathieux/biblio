@@ -1,20 +1,14 @@
-<p>avis-page works!</p>
-
 
 <h1>Liste des avis</h1>
 
-<form (submit)="addOrUpdate()" [formGroup]="formAvis">
-
+<form class="form-inline" (submit)="addOrUpdate()" [formGroup]="formAvis">
 
   <select formControlName="livre" [compareWith]="compareLivre">
+    <option *ngFor="let livre of livres$ | async" [ngValue]="livre">
+      {{ livre.titre }}
+    </option>
+  </select>
 
-  <option *ngFor="let livre of livres$ | async" [ngValue]="livre">
-
-    {{ livre.titre }}
-
-  </option>
-
-</select>
   <div>
     <input type="number" placeholder="Note" formControlName="note" />
   </div>
@@ -27,10 +21,10 @@
     <input type="date" formControlName="date" />
   </div>
 
-
   <div>
     <input type="submit" [value]="editingAvisId ? 'Modifier' : 'Ajouter'" />
   </div>
+
 </form>
 
 <hr />
