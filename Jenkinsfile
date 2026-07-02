@@ -18,6 +18,7 @@ pipeline {
 
             steps {
                 dir('biblio-back/bibliotheque') {
+                        sh 'getent hosts host.docker.internal'
                         sh "mvn clean package"
                     }
                     
