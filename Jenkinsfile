@@ -23,9 +23,9 @@ pipeline {
 
         stage('Clean docker') {
             steps {
-                 sh 'docker rm -f biblio-java-1 || true  '
-                 sh 'docker rm -f biblio-mysql || true '
-                 sh 'docker rm -f biblio-angular || true '
+                 sh 'docker rm -f biblio-java-1'
+                 sh 'docker rm -f biblio-mysql '
+                 sh 'docker rm -f biblio-angular'
             }
         }
 
