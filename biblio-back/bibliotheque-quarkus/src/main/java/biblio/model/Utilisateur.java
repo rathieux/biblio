@@ -9,16 +9,19 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
+@UserDefinition
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    @Username
+    protected String username;
 
     @Column(nullable = false)
-    private String password;
+    @Password
+    protected String password;
 
     public int getId() {
         return id;
