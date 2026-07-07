@@ -3,6 +3,7 @@ package biblio.api;
 import java.util.List;
 
 import biblio.dao.IDAOAvis;
+import biblio.dao.IDAOLivre;
 import biblio.model.Avis;
 import biblio.request.CreateOrUpdateAvisRequest;
 import biblio.response.AvisResponse;
@@ -19,8 +20,10 @@ import jakarta.ws.rs.PathParam;
 public class AvisResource {
 
     private final IDAOAvis avisDao;
+    private final IDAOLivre livreDao;
 
-    public AvisResource(IDAOAvis avisDao) {
+    public AvisResource(IDAOAvis avisDao, IDAOLivre livreDao) {
+        this.livreDao = livreDao;
         this.avisDao = avisDao;
     }
 
@@ -53,6 +56,7 @@ public class AvisResource {
         avis.setNote(request.getNote());
         avis.setCommentaire(request.getCommentaire());
         avis.setDate(request.getDate());
+        avis.setLivre(this.livreDao.findById(request.getLivre().getId()));
 
         avisDao.persist(avis);
         return avis;
@@ -67,6 +71,7 @@ public class AvisResource {
         avis.setNote(request.getNote());
         avis.setCommentaire(request.getCommentaire());
         avis.setDate(request.getDate());
+        avis.setLivre(this.livreDao.findById(request.getLivre().getId()));
 
         this.avisDao.persist(avis);
 

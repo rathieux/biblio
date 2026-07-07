@@ -3,6 +3,7 @@ package biblio.response;
 import java.time.LocalDate;
 
 import biblio.model.Avis;
+import biblio.model.Livre;
 
 public class AvisResponse {
 
@@ -10,6 +11,7 @@ public class AvisResponse {
     private int note;
     private String commentaire;
     private LocalDate date;
+    private Livre livreCustom;
 
     public Integer getId() {
         return id;
@@ -51,6 +53,19 @@ public class AvisResponse {
         resp.setCommentaire(avis.getCommentaire());
         resp.setDate(avis.getDate());
 
+        Livre chien = new Livre();
+        chien.setTitre(avis.getLivre().getTitre());
+        chien.setId(avis.getLivre().getId());
+        resp.setLivreCustom(chien);
+
         return resp;
+    }
+
+    public Livre getLivreCustom() {
+        return livreCustom;
+    }
+
+    public void setLivreCustom(Livre livreCustom) {
+        this.livreCustom = livreCustom;
     }
 }

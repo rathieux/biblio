@@ -2,12 +2,16 @@ package biblio.request;
 
 import java.time.LocalDate;
 
+import biblio.model.Livre;
+
 public class CreateOrUpdateAvisRequest {
     private int note;
 
     private String commentaire;
 
     private LocalDate date;
+
+    private Livre livre;
 
     public int getNote() {
         return note;
@@ -31,6 +35,14 @@ public class CreateOrUpdateAvisRequest {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
     }
 
 }

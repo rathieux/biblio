@@ -1,5 +1,8 @@
 package biblio.dto.response;
 
+
+import biblio.model.Auteur;
+import biblio.model.Collection;
 import biblio.model.Editeur;
 import biblio.model.Livre;
 
@@ -7,10 +10,11 @@ public class LivreResponse {
     private Integer id;
     private String titre;
     private String resume;
-    private String annee;
-    private String auteur;
-    private String editeur;
-    private String collection;
+
+    private Integer annee;
+    private Auteur auteur;
+    private Editeur editeur;
+    private Collection collection;
 
     public Integer getId(){
         return id;
@@ -36,35 +40,35 @@ public class LivreResponse {
         this.resume = resume;
     }
 
-    public String getAnnee(){
+    public Integer getAnnee(){
         return annee;
     }
 
-    public void setAnnee(String annee){
+    public void setAnnee(Integer annee){
         this.annee = annee;
     }
 
-    public String getAuteur(){
+    public Auteur getAuteur(){
         return auteur;
     }
 
-    public void setAuteur(String auteur){
+    public void setAuteur(Auteur auteur){
         this.auteur = auteur;
     }
 
-    public String getEditeur(){
+    public Editeur getEditeur(){
         return editeur;
     }
 
-    public void setEditeur(String editeur){
+    public void setEditeur(Editeur editeur){
         this.editeur = editeur;
     }
 
-    public String getCollection(){
+    public Collection getCollection(){
         return collection;
     }
 
-    public void setCollection(String collection){
+    public void setCollection(Collection collection){
         this.collection = collection;
     }
 
@@ -74,10 +78,10 @@ public class LivreResponse {
         resp.setId(livre.getId());
         resp.setTitre(livre.getTitre());
         resp.setResume(livre.getResume());
-        //resp.setAnnee(livre.getAnnee());
-        //resp.setAuteur(livre.getAuteur());
-        //resp.setEditeur(livre.getEditeur());
-        //resp.setCollection(livre.getCollection());
+        resp.setAnnee(livre.getAnnee());
+        resp.setAuteur(livre.getAuteur());
+        resp.setEditeur(livre.getEditeur());
+        resp.setCollection(livre.getCollection());
 
         return resp;
     }

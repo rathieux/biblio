@@ -6,6 +6,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import biblio.dao.IDAOAuteur;
+import biblio.dao.IDAOCollection;
+import biblio.dao.IDAOEditeur;
 import biblio.dao.IDAOLivre;
 import biblio.dto.request.CreateOrUpdateLivreRequest;
 import biblio.dto.response.LivreResponse;
@@ -24,9 +27,16 @@ import jakarta.ws.rs.core.Response;
 public class LivreResource {
     private static Logger log = LoggerFactory.getLogger(LivreResource.class);
     private final IDAOLivre livreDao;
+    private final IDAOAuteur auteurDao;
+    private final IDAOEditeur editeurDao;
+    private final IDAOCollection collectionDao;
 
-    public LivreResource(IDAOLivre livreDao) {
+    public LivreResource(IDAOLivre livreDao, IDAOAuteur auteurDao, IDAOEditeur editeurDao,
+            IDAOCollection collectionDao) {
         this.livreDao = livreDao;
+        this.auteurDao = auteurDao;
+        this.editeurDao = editeurDao;
+        this.collectionDao = collectionDao;
     }
 
     @GET
@@ -52,6 +62,11 @@ public class LivreResource {
         Livre livre = new Livre();
 
         livre.setTitre(request.getTitre());
+        livre.setResume(request.getResume());
+        livre.setAnnee(request.getAnnee());
+        livre.setAuteur(this.auteurDao.findById(request.getAuteur().getId()));
+        livre.setEditeur(this.editeurDao.findById(request.getEditeur().getId()));
+        livre.setCollection(this.collectionDao.findById(request.getCollection().getId()));
 
         this.livreDao.persist(livre);
 
@@ -71,10 +86,14 @@ public class LivreResource {
         Livre livre = this.livreDao.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
         livre.setTitre(request.getTitre());
+        livre.setResume(request.getResume());
+        livre.setAnnee(request.getAnnee());
+        livre.setAuteur(this.auteurDao.findById(request.getAuteur().getId()));
+        livre.setEditeur(this.editeurDao.findById(request.getEditeur().getId()));
+        livre.setCollection(this.collectionDao.findById(request.getCollection().getId()));
 
         this.livreDao.persist(livre);
 
-        log.debug("Livre modifiée !");
 
         return Response.ok(Map.of("id", livre.getId())).build();
     }
