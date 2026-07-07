@@ -1,4 +1,4 @@
-package quest.dto.response;
+package biblio.dto.response;
 
 import biblio.model.Editeur;
 

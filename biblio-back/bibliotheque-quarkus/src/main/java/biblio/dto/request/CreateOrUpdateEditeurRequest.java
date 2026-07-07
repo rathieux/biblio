@@ -1,4 +1,4 @@
-package quest.dto.request;
+package biblio.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

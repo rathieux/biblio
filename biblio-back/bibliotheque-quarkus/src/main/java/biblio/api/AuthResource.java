@@ -1,4 +1,4 @@
-package quest.api;
+package biblio.api;
 
 import io.quarkus.security.credential.PasswordCredential;
 import io.quarkus.security.identity.SecurityIdentity;

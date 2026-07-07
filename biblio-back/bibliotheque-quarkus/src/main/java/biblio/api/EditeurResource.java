@@ -1,4 +1,4 @@
-package quest.api;
+package biblio.api;
 
 import java.util.List;
 import java.util.Map;

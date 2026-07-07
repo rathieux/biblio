@@ -1,6 +1,6 @@
-package quest.dto.response;
+package biblio.dto.response;
 
-import quest.model.Livre;
+import biblio.model.Livre;
 
 public record LivreResponse(int id, String titre, String resume, String annee, String auteur, String editeur, String collection) {
     public static LivreResponse convert(Livre livre) {
