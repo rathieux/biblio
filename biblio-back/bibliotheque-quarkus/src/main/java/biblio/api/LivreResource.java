@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
@@ -16,25 +15,25 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import quest.dto.request.CreateOrUpdateLivreRequest;
-import quest.dto.response.LivreResponse;
-import quest.model.Livre;
-import quest.repo.LivreRepository;
+import biblio.dao.IDAOLivre;
+import biblio.dto.request.CreateOrUpdateLivreRequest;
+import biblio.dto.response.LivreResponse;
+import biblio.model.Livre;
 
 @Path("/api/livre")
 public class LivreResource {
     private static Logger log = LoggerFactory.getLogger(LivreResource.class);
-    private final LivreRepository repository;
+    private final IDAOLivre livreDao;
 
-    public LivreResource(LivreRepository repository) {
-        this.repository = repository;
+    public LivreResource(IDAOLivre livreDao) {
+        this.livreDao = livreDao;
     }
 
     @GET
     public List<LivreResponse> findAll() {
         log.debug("Liste des livres ...");
 
-        return this.repository.findAll().stream().map(LivreResponse::convert).toList();
+        return this.livreDao.findAll().stream().map(LivreResponse::convert).toList();
     }
 
     @GET
@@ -42,7 +41,7 @@ public class LivreResource {
     public LivreResponse findById(@PathParam("id") Integer id) {
         log.debug("Recherche du livre {} ...", id);
 
-        return LivreResponse.convert(this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new));
+        return LivreResponse.convert(this.livreDao.findByIdOptional(id).orElseThrow(NotFoundException::new));
     }
 
     @GET
@@ -50,7 +49,7 @@ public class LivreResource {
     public LivreResponse findByLibelle(@PathParam("titre") String titre) {
         log.debug("Recherche du livre par titre {} ...", titre);
 
-        return LivreResponse.convert(this.repository.findByLibelle(titre).orElseThrow(NotFoundException::new));
+        return LivreResponse.convert(this.livreDao.findByTitre(titre).orElseThrow(NotFoundException::new));
     }
 
     @Transactional
@@ -62,7 +61,7 @@ public class LivreResource {
 
         livre.setTitre(request.titre());
 
-        this.repository.persist(livre);
+        this.livreDao.persist(livre);
 
         log.debug("Livre créée !");
 
@@ -78,11 +77,11 @@ public class LivreResource {
     public Response update(@PathParam("id") Integer id, @Valid CreateOrUpdateLivreRequest request) {
         log.debug("Modification de la titre {} ...", id);
 
-        Livre livre = this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new);
+        Livre livre = this.livreDao.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
         livre.setTitre(request.titre());
 
-        this.repository.persist(livre);
+        this.livreDao.persist(livre);
 
         log.debug("Livre modifiée !");
 
@@ -95,7 +94,7 @@ public class LivreResource {
     public Response deleteById(@PathParam("id") Integer id) {
         log.debug("Suppression du livre {} ...", id);
 
-        this.repository.deleteById(id);
+        this.livreDao.deleteById(id);
 
         log.debug("Livre supprimée !");
 

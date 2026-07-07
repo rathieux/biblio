@@ -1,11 +1,8 @@
 package biblio.dao;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import biblio.model.Utilisateur;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
-public interface IDAOUtilisateur extends JpaRepository<Utilisateur, Integer> {
-    public Optional<Utilisateur> findByUsername(String username);
+public class IDAOUtilisateur implements PanacheRepositoryBase<Utilisateur, Integer> {
 }

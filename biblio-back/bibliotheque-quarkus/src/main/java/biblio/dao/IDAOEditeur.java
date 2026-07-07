@@ -1,9 +1,8 @@
 package biblio.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import biblio.model.Editeur;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
-public interface IDAOEditeur extends JpaRepository<Editeur,Integer> {
+public class IDAOEditeur implements PanacheRepositoryBase<Editeur,Integer> {
 
 }

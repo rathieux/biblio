@@ -8,8 +8,8 @@ import io.smallrye.jwt.build.Jwt;
 import jakarta.persistence.EntityManager;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import quest.dto.request.AuthRequest;
-import quest.dto.response.AuthResponse;
+import biblio.dto.request.AuthRequest;
+import biblio.dto.response.AuthResponse;
 
 @Path("/api/auth")
 public class AuthResource {

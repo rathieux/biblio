@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
@@ -16,17 +15,17 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import quest.dto.request.CreateOrUpdateEditeurRequest;
-import quest.dto.response.EditeurResponse;
-import quest.model.Editeur;
-import quest.repo.EditeurRepository;
+import biblio.dao.IDAOEditeur;
+import biblio.dto.request.CreateOrUpdateEditeurRequest;
+import biblio.dto.response.EditeurResponse;
+import biblio.model.Editeur;
 
 @Path("/api/editeur")
 public class EditeurResource {
     private static Logger log = LoggerFactory.getLogger(EditeurResource.class);
-    private final EditeurRepository repository;
+    private final IDAOEditeur repository;
 
-    public EditeurResource(EditeurRepository repository) {
+    public EditeurResource(IDAOEditeur repository) {
         this.repository = repository;
     }
 
@@ -55,7 +54,7 @@ public class EditeurResource {
 
     @Transactional
     @POST
-    public Response create(@Valid CreateOrUpdateEditeurRequest request) {
+    public Response create(CreateOrUpdateEditeurRequest request) {
         log.debug("Création d'un nouvelle éditeur ...");
 
         Editeur editeur = new Editeur();
