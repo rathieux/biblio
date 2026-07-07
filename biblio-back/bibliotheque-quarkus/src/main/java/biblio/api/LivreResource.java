@@ -6,6 +6,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import biblio.dao.IDAOLivre;
+import biblio.dto.request.CreateOrUpdateLivreRequest;
+import biblio.dto.response.LivreResponse;
+import biblio.model.Livre;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,10 +19,6 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import biblio.dao.IDAOLivre;
-import biblio.dto.request.CreateOrUpdateLivreRequest;
-import biblio.dto.response.LivreResponse;
-import biblio.model.Livre;
 
 @Path("/api/livre")
 public class LivreResource {
@@ -44,42 +44,33 @@ public class LivreResource {
         return LivreResponse.convert(this.livreDao.findByIdOptional(id).orElseThrow(NotFoundException::new));
     }
 
-    @GET
-    @Path("/by-titre/{titre}")
-    public LivreResponse findByLibelle(@PathParam("titre") String titre) {
-        log.debug("Recherche du livre par titre {} ...", titre);
-
-        return LivreResponse.convert(this.livreDao.findByTitre(titre).orElseThrow(NotFoundException::new));
-    }
-
     @Transactional
     @POST
-    public Response create(@Valid CreateOrUpdateLivreRequest request) {
+    public Response create(CreateOrUpdateLivreRequest request) {
         log.debug("Création d'un nouveaux livre ...");
 
         Livre livre = new Livre();
 
-        livre.setTitre(request.titre());
+        livre.setTitre(request.getTitre());
 
         this.livreDao.persist(livre);
 
         log.debug("Livre créée !");
 
         return Response.status(Response.Status.CREATED)
-            .entity(Map.of("id", livre.getId()))
-            .build()
-        ;
+                .entity(Map.of("id", livre.getId()))
+                .build();
     }
 
     @Transactional
     @PUT
     @Path("/{id}")
-    public Response update(@PathParam("id") Integer id, @Valid CreateOrUpdateLivreRequest request) {
+    public Response update(@PathParam("id") Integer id, CreateOrUpdateLivreRequest request) {
         log.debug("Modification de la titre {} ...", id);
 
         Livre livre = this.livreDao.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
-        livre.setTitre(request.titre());
+        livre.setTitre(request.getTitre());
 
         this.livreDao.persist(livre);
 

@@ -59,27 +59,26 @@ public class EditeurResource {
 
         Editeur editeur = new Editeur();
 
-        editeur.setTitre(request.titre());
+        editeur.setTitre(request.getTitre());
 
         this.repository.persist(editeur);
 
         log.debug("Editeur créée !");
 
         return Response.status(Response.Status.CREATED)
-            .entity(Map.of("id", editeur.getId()))
-            .build()
-        ;
+                .entity(Map.of("id", editeur.getId()))
+                .build();
     }
 
     @Transactional
     @PUT
     @Path("/{id}")
-    public Response update(@PathParam("id") Integer id, @Valid CreateOrUpdateEditeurRequest request) {
+    public Response update(@PathParam("id") Integer id, CreateOrUpdateEditeurRequest request) {
         log.debug("Modification de la titre {} ...", id);
 
         Editeur editeur = this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
-        editeur.setTitre(request.titre());
+        editeur.setTitre(request.getTitre());
 
         this.repository.persist(editeur);
 

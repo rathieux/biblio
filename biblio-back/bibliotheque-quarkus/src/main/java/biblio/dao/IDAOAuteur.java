@@ -2,7 +2,9 @@ package biblio.dao;
 
 import biblio.model.Auteur;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import jakarta.enterprise.context.ApplicationScoped;
 
-public interface IDAOAuteur extends PanacheRepositoryBase<Auteur, Integer> {
+@ApplicationScoped
+public class IDAOAuteur implements PanacheRepositoryBase<Auteur, Integer> {
 
 }

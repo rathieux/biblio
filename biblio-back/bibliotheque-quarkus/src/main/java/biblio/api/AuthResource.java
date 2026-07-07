@@ -1,5 +1,7 @@
 package biblio.api;
 
+import biblio.dto.request.AuthRequest;
+import biblio.dto.response.AuthResponse;
 import io.quarkus.security.credential.PasswordCredential;
 import io.quarkus.security.identity.SecurityIdentity;
 import io.quarkus.security.identity.request.UsernamePasswordAuthenticationRequest;
@@ -8,8 +10,6 @@ import io.smallrye.jwt.build.Jwt;
 import jakarta.persistence.EntityManager;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import biblio.dto.request.AuthRequest;
-import biblio.dto.response.AuthResponse;
 
 @Path("/api/auth")
 public class AuthResource {
@@ -24,8 +24,8 @@ public class AuthResource {
     @POST
     public AuthResponse auth(AuthRequest request) {
         UsernamePasswordAuthenticationRequest authRequest = new UsernamePasswordAuthenticationRequest(
-            request.login(), // Le nom d'utilisateur
-            new PasswordCredential(request.password().toCharArray()) // Le mot de passe
+            request.getLogin(), // Le nom d'utilisateur
+            new PasswordCredential(request.getPassword().toCharArray()) // Le mot de passe
         );
 
         // Authentification de l'utilisateur
@@ -33,8 +33,8 @@ public class AuthResource {
 
         // Si tout est OK, on peut générer le jeton
         String jwt = Jwt
-            .issuer("quest-quarkus")
-            .upn(request.login()) // User Principal Name ==> le nom d'utilisateur
+            .issuer("bibliotheque-quarkus")
+            .upn(request.getLogin()) // User Principal Name ==> le nom d'utilisateur
             .groups(securityIdentity.getRoles()) // Liste des rôles de l'utilisateur connecté, avec @Roles et @UserDefinition
             .sign() // Signer le jeton JWT
         ;
