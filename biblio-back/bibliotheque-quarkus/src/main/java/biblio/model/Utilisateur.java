@@ -1,6 +1,7 @@
 package biblio.model;
 
 import io.quarkus.security.jpa.Password;
+import io.quarkus.security.jpa.Roles;
 import io.quarkus.security.jpa.UserDefinition;
 import io.quarkus.security.jpa.Username;
 import jakarta.persistence.Column;
@@ -48,6 +49,11 @@ public class Utilisateur {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Roles
+    public String role() {
+        return "admin";
     }
 
 }

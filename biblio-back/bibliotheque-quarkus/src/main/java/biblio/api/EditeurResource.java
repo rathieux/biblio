@@ -6,6 +6,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import biblio.dao.IDAOEditeur;
+import biblio.dto.request.CreateOrUpdateEditeurRequest;
+import biblio.dto.response.EditeurResponse;
+import biblio.model.Editeur;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,10 +19,6 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
-import biblio.dao.IDAOEditeur;
-import biblio.dto.request.CreateOrUpdateEditeurRequest;
-import biblio.dto.response.EditeurResponse;
-import biblio.model.Editeur;
 
 @Path("/api/editeur")
 public class EditeurResource {
@@ -44,14 +44,6 @@ public class EditeurResource {
         return EditeurResponse.convert(this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new));
     }
 
-    @GET
-    @Path("/by-libelle/{libelle}")
-    public EditeurResponse findByLibelle(@PathParam("libelle") String libelle) {
-        log.debug("Recherche de la matière par libellé {} ...", libelle);
-
-        return EditeurResponse.convert(this.repository.findByLibelle(libelle).orElseThrow(NotFoundException::new));
-    }
-
     @Transactional
     @POST
     public Response create(CreateOrUpdateEditeurRequest request) {
@@ -59,7 +51,9 @@ public class EditeurResource {
 
         Editeur editeur = new Editeur();
 
-        editeur.setTitre(request.getTitre());
+        
+        editeur.setNom(request.getNom());
+        editeur.setPays(request.getPays());
 
         this.repository.persist(editeur);
 
@@ -78,7 +72,8 @@ public class EditeurResource {
 
         Editeur editeur = this.repository.findByIdOptional(id).orElseThrow(NotFoundException::new);
 
-        editeur.setTitre(request.getTitre());
+        editeur.setNom(request.getNom());
+        editeur.setPays(request.getPays());
 
         this.repository.persist(editeur);
 

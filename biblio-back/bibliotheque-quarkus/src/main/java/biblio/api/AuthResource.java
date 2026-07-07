@@ -22,9 +22,9 @@ public class AuthResource {
     }
 
     @POST
-    public AuthResponse auth(AuthRequest request) {
+    public String auth(AuthRequest request) {
         UsernamePasswordAuthenticationRequest authRequest = new UsernamePasswordAuthenticationRequest(
-            request.getLogin(), // Le nom d'utilisateur
+            request.getUsername(), // Le nom d'utilisateur
             new PasswordCredential(request.getPassword().toCharArray()) // Le mot de passe
         );
 
@@ -33,12 +33,12 @@ public class AuthResource {
 
         // Si tout est OK, on peut générer le jeton
         String jwt = Jwt
-            .issuer("bibliotheque-quarkus")
-            .upn(request.getLogin()) // User Principal Name ==> le nom d'utilisateur
+            .issuer("biblio-issuer")
+            .upn(request.getUsername()) // User Principal Name ==> le nom d'utilisateur
             .groups(securityIdentity.getRoles()) // Liste des rôles de l'utilisateur connecté, avec @Roles et @UserDefinition
             .sign() // Signer le jeton JWT
         ;
 
-        return new AuthResponse(true, jwt);
+        return jwt;
     }
 }
