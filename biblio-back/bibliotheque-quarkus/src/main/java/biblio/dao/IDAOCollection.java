@@ -2,7 +2,9 @@ package biblio.dao;
 
 import biblio.model.Collection;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import jakarta.enterprise.context.ApplicationScoped;
 
-public interface IDAOCollection extends PanacheRepositoryBase<Collection, Integer> {
+@ApplicationScoped
+public class IDAOCollection implements PanacheRepositoryBase<Collection, Integer> {
 
 }
